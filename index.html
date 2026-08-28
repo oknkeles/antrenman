@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demir Defteri</title>
+<meta name="description" content="5 gunluk hipertrofi programi: set takibi, dinlenme sayaci, form videolari.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E9ECF0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1318" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Demir Defteri">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 180 180%27%3E%3Crect width=%27180%27 height=%27180%27 fill=%27%230F1318%27/%3E%3Cg fill=%27%234C9AE8%27%3E%3Crect x=%2734%27 y=%2786%27 width=%27112%27 height=%278%27/%3E%3Crect x=%2750%27 y=%2762%27 width=%2714%27 height=%2756%27/%3E%3Crect x=%27116%27 y=%2762%27 width=%2714%27 height=%2756%27/%3E%3Crect x=%2734%27 y=%2774%27 width=%2712%27 height=%2732%27/%3E%3Crect x=%27134%27 y=%2774%27 width=%2712%27 height=%2732%27/%3E%3C/g%3E%3C/svg%3E">
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --ground:#E9ECF0; --surface:#FFFFFF; --surface-2:#F3F5F8; --line:#D3D9E1;
+  --ink:#141922; --ink-2:#4E5967; --ink-3:#7C8797;
+  --accent:#12518F; --accent-soft:#DCE7F4; --accent-ink:#0C3B69;
+  --hot:#B3271F; --warn:#8A6300; --warn-fill:#E8B31F; --good:#1F6B3D; --good-fill:#2E8B4F;
+  --shadow:0 1px 2px rgba(20,25,34,.06),0 4px 14px rgba(20,25,34,.05);
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1318; --surface:#171C23; --surface-2:#1E242D; --line:#2A323C;
+    --ink:#E7EBF1; --ink-2:#A3ADBB; --ink-3:#79838F;
+    --accent:#4C9AE8; --accent-soft:#16283C; --accent-ink:#9CC8F5;
+    --hot:#E5544B; --warn:#E8B31F; --warn-fill:#E8B31F; --good:#3FBF6E; --good-fill:#2E8B4F;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1318; --surface:#171C23; --surface-2:#1E242D; --line:#2A323C;
+  --ink:#E7EBF1; --ink-2:#A3ADBB; --ink-3:#79838F;
+  --accent:#4C9AE8; --accent-soft:#16283C; --accent-ink:#9CC8F5;
+  --hot:#E5544B; --warn:#E8B31F; --warn-fill:#E8B31F; --good:#3FBF6E; --good-fill:#2E8B4F;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  font-size:16px; line-height:1.5; -webkit-text-size-adjust:100%;
+  padding-bottom:96px;
+}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+
+/* ---- top bar ---- */
+header.top{
+  position:sticky; top:0; z-index:40; background:var(--ground);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:baseline;gap:10px;padding:14px 0 10px}
+.brand h1{
+  margin:0; font-size:19px; font-weight:800;
+  font-variation-settings:"wdth" 118; letter-spacing:.01em; text-transform:uppercase;
+}
+.brand .streak{margin-left:auto;font-size:12px;color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase}
+.brand .streak b{color:var(--accent);font-weight:600}
+.days{display:flex;gap:6px;padding-bottom:10px;overflow-x:auto;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.daybtn{
+  flex:1 0 auto; min-width:44px; padding:7px 9px 8px; border-radius:10px; cursor:pointer;
+  border:1px solid var(--line); background:var(--surface); color:var(--ink-2);
+  font-family:inherit; font-size:12px; font-weight:600; letter-spacing:.04em;
+  text-transform:uppercase; text-align:center; position:relative; transition:background .12s,color .12s,border-color .12s;
+}
+.daybtn small{display:block;font-size:9px;font-weight:600;color:var(--ink-3);letter-spacing:.06em;margin-top:2px}
+.daybtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.daybtn[aria-pressed="true"] small{color:rgba(255,255,255,.75)}
+.daybtn.today::after{content:"";position:absolute;top:5px;right:5px;width:5px;height:5px;border-radius:50%;background:var(--hot)}
+.daybtn.done small::before{content:"✓ ";color:var(--good)}
+.daybtn[aria-pressed="true"].done small::before{color:#fff}
+.daybtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---- day head ---- */
+.dayhead{padding:18px 0 6px}
+.dayhead .kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.dayhead h2{
+  margin:2px 0 4px; font-size:34px; line-height:1.05; font-weight:800;
+  font-variation-settings:"wdth" 112; letter-spacing:-.01em; text-wrap:balance;
+}
+.dayhead p{margin:0;color:var(--ink-2);font-size:14px}
+.legend{
+  margin:14px 0 0; padding:9px 12px; border-radius:10px; background:var(--accent-soft);
+  color:var(--accent-ink); font-size:12.5px; line-height:1.45;
+}
+.legend b{font-weight:600}
+
+/* ---- blocks ---- */
+.blocks{display:flex;flex-direction:column;gap:12px;padding-top:14px}
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--shadow); overflow:hidden;
+}
+.card.plain{padding:14px 16px}
+.plain h3{
+  margin:0 0 8px; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:600;
+}
+.plain ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:14.5px}
+.plain ul li{margin:3px 0}
+
+.ex{display:flex;align-items:stretch}
+.rail{
+  flex:0 0 42px; background:var(--surface-2); border-right:1px solid var(--line);
+  display:flex; flex-direction:column; align-items:center; padding:12px 0 10px; gap:8px;
+}
+.rail .n{font-size:13px;font-weight:600;color:var(--ink-3)}
+.load{flex:1;width:4px;border-radius:2px;background:var(--line);position:relative;overflow:hidden;min-height:34px}
+.load i{position:absolute;left:0;bottom:0;width:100%;background:var(--good-fill);height:0;transition:height .22s ease}
+.body{flex:1;min-width:0;padding:12px 14px 13px}
+.exname{margin:0;font-size:17.5px;font-weight:700;line-height:1.25;font-variation-settings:"wdth" 104;text-wrap:balance}
+.exname.done{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px}
+.exsub{margin:1px 0 0;font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.chip{
+  font-size:11.5px;font-weight:600;letter-spacing:.03em;padding:3px 8px;border-radius:6px;
+  background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line);white-space:nowrap;
+}
+.chip b{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.chip.fail{background:transparent;border-color:var(--warn-fill);color:var(--warn)}
+.chip.uni{background:transparent;border-color:var(--accent);color:var(--accent)}
+.chip.tempo{background:transparent;border-color:var(--line)}
+
+.note{margin:9px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.45}
+.note::before{content:"→ ";color:var(--ink-3)}
+
+.setrow{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.setlbl{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;width:100%}
+.dot{
+  width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);
+  color:var(--ink-3); font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600;
+  cursor:pointer; transition:background .14s,border-color .14s,color .14s,transform .1s;
+}
+.dot:active{transform:scale(.94)}
+.dot.on{background:var(--good-fill);border-color:var(--good-fill);color:#fff}
+.dot:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.kg{
+  margin-left:auto;display:flex;align-items:center;gap:5px;
+  border:1.5px solid var(--line);border-radius:10px;padding:2px 9px 2px 10px;background:var(--surface);
+}
+.kg input{
+  width:52px;border:0;background:transparent;color:var(--ink);font-family:"IBM Plex Mono",monospace;
+  font-size:15px;font-weight:600;text-align:right;padding:8px 0;outline:none;font-variant-numeric:tabular-nums;
+}
+.kg span{font-size:12px;color:var(--ink-3);font-weight:600}
+.kg:focus-within{border-color:var(--accent)}
+
+.links{display:flex;gap:14px;align-items:center;margin-top:11px;flex-wrap:wrap}
+.vid{
+  font-size:12.5px;font-weight:600;color:var(--accent);text-decoration:none;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.vid:hover{text-decoration:underline}
+.vid svg{flex:none}
+details.alt{font-size:12.5px}
+details.alt summary{color:var(--ink-3);cursor:pointer;font-weight:600;list-style:none}
+details.alt summary::-webkit-details-marker{display:none}
+details.alt summary::before{content:"⇄ "}
+details.alt p{margin:6px 0 0;color:var(--ink-2)}
+
+.sslabel{
+  display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--accent-soft);
+  color:var(--accent-ink);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+}
+.sspair{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.ssitem{display:flex;gap:10px;align-items:baseline}
+.ssitem .tag{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:#fff;background:var(--accent);
+  width:20px;height:20px;border-radius:5px;display:grid;place-items:center;flex:none;
+}
+.ssitem .t{font-size:16px;font-weight:700;line-height:1.3}
+.ssitem .s{font-size:11.5px;color:var(--ink-3)}
+
+.restday{
+  padding:26px 18px;text-align:center;background:var(--surface);border:1px dashed var(--line);
+  border-radius:var(--r);
+}
+.restday .big{font-size:26px;font-weight:800;font-variation-settings:"wdth" 110;margin:0 0 6px}
+.restday p{margin:0;color:var(--ink-2);font-size:14.5px}
+
+.startbtn{
+  margin-top:11px;width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--accent);
+  background:transparent;color:var(--accent);font-family:inherit;font-size:14px;font-weight:700;
+  letter-spacing:.04em;cursor:pointer;
+}
+.startbtn:active{background:var(--accent-soft)}
+
+/* ---- footer sections ---- */
+.sec{margin-top:26px}
+.sec > h3{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:600;margin:0 0 10px;
+}
+.rules{display:flex;flex-direction:column;gap:10px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.rule h4{margin:0 0 4px;font-size:15px;font-weight:700}
+.rule p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.rule .num{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--accent);font-weight:600;
+  letter-spacing:.1em;display:block;margin-bottom:3px;
+}
+.volwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table.vol{border-collapse:collapse;width:100%;font-size:13.5px}
+table.vol th,table.vol td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+table.vol tr:last-child td{border-bottom:0}
+table.vol th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+table.vol td:last-child{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:600}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.tool{
+  padding:9px 13px;border-radius:9px;border:1px solid var(--line);background:var(--surface);
+  color:var(--ink-2);font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;
+}
+.tool:active{background:var(--surface-2)}
+footer.fine{margin:22px 0 8px;font-size:12px;color:var(--ink-3);line-height:1.5}
+
+/* ---- timer ---- */
+#timer{
+  position:fixed;inset:0;z-index:100;background:var(--ground);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:24px;
+}
+#timer.show{display:flex}
+#timer .ctx{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:600;text-align:center}
+#timer .ring{position:relative;width:236px;height:236px;margin:14px 0 6px}
+#timer svg{transform:rotate(-90deg);width:100%;height:100%}
+#timer .trk{fill:none;stroke:var(--line);stroke-width:8}
+#timer .bar{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .95s linear,stroke .3s}
+#timer.warn .bar{stroke:var(--hot)}
+#timer .num{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-family:"IBM Plex Mono",monospace;font-size:58px;font-weight:600;font-variant-numeric:tabular-nums;
+  letter-spacing:-.02em;
+}
+#timer .next{font-size:17px;font-weight:700;text-align:center;text-wrap:balance;max-width:20ch}
+#timer .btns{display:flex;gap:10px;margin-top:22px}
+#timer .btns button{
+  padding:13px 20px;border-radius:11px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;
+  border:1.5px solid var(--line);background:var(--surface);color:var(--ink);
+}
+#timer .btns .go{background:var(--accent);border-color:var(--accent);color:#fff;padding-inline:30px}
+#timer .btns button:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (min-width:560px){.dayhead h2{font-size:40px}}
+</style>
+
+<header class="top" lang="tr">
+  <div class="wrap">
+    <div class="brand">
+      <h1>Demir Defteri</h1>
+      <span class="streak">Bu hafta <b id="streak">0/5</b></span>
+    </div>
+    <nav class="days" id="days" aria-label="Gün seçimi"></nav>
+  </div>
+</header>
+
+<main class="wrap" id="main" lang="tr"></main>
+
+<div id="timer" lang="tr" role="dialog" aria-label="Dinlenme sayacı" aria-live="polite">
+  <div class="ctx" id="t-ctx">Dinlenme</div>
+  <div class="ring">
+    <svg viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="trk" cx="60" cy="60" r="54"></circle>
+      <circle class="bar" id="t-bar" cx="60" cy="60" r="54" stroke-dasharray="339.29" stroke-dashoffset="0"></circle>
+    </svg>
+    <div class="num mono" id="t-num">0:00</div>
+  </div>
+  <div class="next" id="t-next"></div>
+  <div class="btns">
+    <button type="button" id="t-minus">−15 sn</button>
+    <button type="button" class="go" id="t-skip">Hazırım</button>
+    <button type="button" id="t-plus">+15 sn</button>
+  </div>
+</div>
+
+<script>
+document.documentElement.lang="tr";
+/* ============ PROGRAM ============ */
+const P = [
+{id:"mon",wd:"Pazartesi",short:"Pzt",name:"PUSH",focus:"Göğüs · Omuz · Triceps",blocks:[
+ {t:"warm",items:["5 dk kürek veya bisiklet","Lastikle omuz dış rotasyon 2×15","Boş bar / hafif dambılla 2 ısınma seti"]},
+ {t:"ex",id:"mon_e1",tr:"Eğimli Dambıl Press",en:"Incline Dumbbell Press",sets:4,r1:6,r2:8,rest:150,rir:2,note:"Sehpa 30 derece. Dirsekler gövdeden 45 derece açık.",alt:["Incline Barbell Press","Incline Machine Press"]},
+ {t:"ex",id:"mon_e2",tr:"Düz Makine Göğüs Press",en:"Flat Machine Chest Press",sets:3,r1:8,r2:10,rest:120,rir:2,alt:["Flat Barbell Bench Press","Flat Dumbbell Press"]},
+ {t:"ex",id:"mon_e3",tr:"Kablo Fly (orta yükseklik)",en:"Cable Fly",sets:3,r1:12,r2:15,rest:75,rir:1,fail:true,note:"Dirsek açısını sabit tut, esneme pozisyonunda 1 sn bekle.",alt:["Pec Deck","Dumbbell Fly"]},
+ {t:"ex",id:"mon_e4",tr:"Oturarak Dambıl Omuz Press",en:"Seated Dumbbell Shoulder Press",sets:3,r1:8,r2:10,rest:120,rir:2,alt:["Machine Shoulder Press","Smith Machine Press"]},
+ {t:"ex",id:"mon_e5",tr:"Dambıl Yan Kaldırış",en:"Dumbbell Lateral Raise",sets:3,r1:15,r2:20,rest:60,rir:1,fail:true,note:"Hafif ağırlık, momentum yok. Omuz genişliğinin ana hareketi.",alt:["Cable Lateral Raise","Machine Lateral Raise"]},
+ {t:"ex",id:"mon_e6",tr:"Halat Triceps Pushdown",en:"Rope Pushdown",sets:3,r1:12,r2:15,rest:60,rir:1,fail:true,alt:["EZ-Bar Pushdown","Overhead Cable Extension"]},
+ {t:"cool",items:["Göğüs kapı esnetmesi 2×30 sn","Triceps esnetme 2×30 sn"]}]},
+
+{id:"tue",wd:"Salı",short:"Sal",name:"PULL",focus:"Sırt · Arka Omuz · Biceps",blocks:[
+ {t:"warm",items:["5 dk kürek makinesi","Lastikle scapular pull 2×15","Hafif ağırlıkla 2 ısınma seti"]},
+ {t:"ex",id:"tue_e1",tr:"Lat Pulldown (geniş tutuş)",en:"Lat Pulldown",sets:4,r1:8,r2:10,rest:150,rir:2,note:"Barı göğse çek, dirsekleri aşağı-geri sür.",alt:["Weighted Pull-up","Assisted Pull-up"]},
+ {t:"ex",id:"tue_e2",tr:"Göğüs Destekli Kürek",en:"Chest-Supported Row",sets:4,r1:8,r2:10,rest:150,rir:2,note:"Göğüs desteği beli devre dışı bırakır, sırta odaklanırsın.",alt:["Barbell Row","T-Bar Row"]},
+ {t:"ex",id:"tue_e3",tr:"Tek Kol Dambıl Kürek",en:"Single Arm Dumbbell Row",sets:3,r1:10,r2:12,rest:90,rir:2,uni:"kol",alt:["Single Arm Cable Row"]},
+ {t:"ex",id:"tue_e4",tr:"Face Pull",en:"Face Pull",sets:3,r1:15,r2:20,rest:60,rir:1,note:"Postür için. Ağırlığı düşük tut, kasmaya odaklan.",alt:["Reverse Pec Deck","Rear Delt Fly"]},
+ {t:"ex",id:"tue_e5",tr:"EZ-Bar Biceps Curl",en:"EZ-Bar Curl",sets:3,r1:8,r2:10,rest:90,rir:1,alt:["Barbell Curl","Cable Curl"]},
+ {t:"ex",id:"tue_e6",tr:"Eğimli Dambıl Curl",en:"Incline Dumbbell Curl",sets:2,r1:12,r2:15,rest:60,rir:0,fail:true,note:"Kollar gövdenin arkasında kalsın, biceps uzun başını esnetir.",alt:["Cable Curl (arkadan)"]},
+ {t:"cool",items:["Lat esnetme 2×30 sn","Biceps esnetme 2×30 sn"]}]},
+
+{id:"wed",wd:"Çarşamba",short:"Çar",name:"LEGS + ABS",focus:"Alt Vücut · Karın",blocks:[
+ {t:"warm",items:["5 dk bisiklet","Kalça açıcı dinamik esnetme 2×10","Boş bar squat 2×10, sonra artan 2 ısınma seti"]},
+ {t:"ex",id:"wed_e1",tr:"Barbell Squat",en:"Barbell Squat",sets:4,r1:6,r2:8,rest:180,rir:2,note:"En uzun dinlenme burada. Acele etme.",alt:["Hack Squat","Smith Machine Squat"]},
+ {t:"ex",id:"wed_e2",tr:"Romen Deadlift",en:"Romanian Deadlift",sets:3,r1:8,r2:10,rest:150,rir:2,note:"Bel nötr. Hareketi hamstring esnemesi durdurur, yer değil.",alt:["Dumbbell RDL","Good Morning"]},
+ {t:"ex",id:"wed_e3",tr:"Leg Press",en:"Leg Press",sets:3,r1:10,r2:12,rest:120,rir:2,alt:["Bulgarian Split Squat","Walking Lunge"]},
+ {t:"ex",id:"wed_e4",tr:"Oturarak Leg Curl",en:"Seated Leg Curl",sets:3,r1:12,r2:15,rest:90,rir:1,fail:true,alt:["Lying Leg Curl"]},
+ {t:"ex",id:"wed_e5",tr:"Ayakta Calf Raise",en:"Standing Calf Raise",sets:3,r1:10,r2:12,rest:90,rir:0,fail:true,tempo:"Tepede 2 sn bekle, 3 sn indir",note:"Baldır tekrar sayısıyla değil, gerilim süresiyle büyür.",alt:["Smith Machine Calf Raise"]},
+ {t:"ex",id:"wed_e6",tr:"Kablo Crunch",en:"Cable Crunch",sets:3,r1:12,r2:15,rest:60,rir:1,fail:true,note:"Kalçadan değil belden kıvır.",alt:["Machine Crunch","Hanging Leg Raise"]},
+ {t:"cool",items:["Quad esnetme 2×30 sn","Hamstring esnetme 2×30 sn"]}]},
+
+{id:"thu",wd:"Perşembe",short:"Per",name:"OFF",focus:"Aktif toparlanma",rest:true,
+ restTitle:"Bugün ağırlık yok",restText:"30-45 dk tempolu yürüyüş. Kaslar bugün büyüyor, salonda değil."},
+
+{id:"fri",wd:"Cuma",short:"Cum",name:"UPPER",focus:"Üst vücut · pompa · hafif yükler",blocks:[
+ {t:"warm",items:["5 dk kardiyo","Omuz ve dirsek mobilitesi 3 dk"]},
+ {t:"ex",id:"fri_e1",tr:"Eğimli Smith Press",en:"Incline Smith Machine Press",sets:3,r1:10,r2:12,rest:120,rir:3,alt:["Incline Machine Press"]},
+ {t:"ex",id:"fri_e2",tr:"Ters Tutuş Barfiks",en:"Chin-up",sets:3,r1:10,r2:12,rest:120,rir:3,alt:["Reverse Grip Lat Pulldown","Assisted Chin-up"]},
+ {t:"ex",id:"fri_e3",tr:"Oturarak Kablo Kürek (nötr tutuş)",en:"Seated Cable Row",sets:3,r1:12,r2:15,rest:90,rir:2,alt:["Machine Row"]},
+ {t:"ex",id:"fri_e4",tr:"Tek Kol Kablo Yan Kaldırış",en:"Cable Lateral Raise",sets:4,r1:15,r2:20,rest:45,rir:1,fail:true,uni:"kol",alt:["Dumbbell Lateral Raise"]},
+ {t:"ss",id:"fri_ss1",rounds:3,rest:90,rir:1,items:[
+   {tr:"Çekiç Curl",en:"Hammer Curl",reps:12},
+   {tr:"Baş Üstü Kablo Triceps",en:"Overhead Cable Triceps Extension",reps:12}]},
+ {t:"cool",items:["Genel üst vücut esnetme"]}]},
+
+{id:"sat",wd:"Cumartesi",short:"Cmt",name:"LOWER + KONDİSYON",focus:"Alt vücut ikinci uyarı · kardiyo bitiriş",blocks:[
+ {t:"warm",items:["5 dk bisiklet","Kalça mobilitesi 3 dk"]},
+ {t:"ex",id:"sat_e1",tr:"Goblet Squat",en:"Goblet Squat",sets:3,r1:12,r2:15,rest:90,rir:2,alt:["Leg Press","Hack Squat"]},
+ {t:"ex",id:"sat_e2",tr:"Hip Thrust",en:"Hip Thrust",sets:3,r1:12,r2:15,rest:90,rir:2,note:"Tepede 1 sn sık.",alt:["Back Extension","Glute Machine"]},
+ {t:"ex",id:"sat_e3",tr:"Yürüyen Lunge",en:"Walking Lunge",sets:3,r1:10,r2:10,rest:90,rir:2,uni:"bacak",alt:["Bulgarian Split Squat","Step-up"]},
+ {t:"ex",id:"sat_e4",tr:"Oturarak Calf Raise",en:"Seated Calf Raise",sets:3,r1:12,r2:15,rest:60,rir:0,fail:true,alt:["Leg Press Calf Raise"]},
+ {t:"ex",id:"sat_e5",tr:"Barda Bacak Kaldırış",en:"Hanging Leg Raise",sets:3,r1:10,r2:15,rest:60,rir:1,fail:true,note:"Sallanmadan, kontrollü.",alt:["Captain's Chair Knee Raise","Reverse Crunch"]},
+ {t:"fin",id:"sat_f1",tr:"Eğimli Yürüyüş",dur:720,note:"Eğim %8-10, konuşabileceğin tempoda. Bisiklet de olur."},
+ {t:"cool",items:["Alt vücut esnetme"]}]},
+
+{id:"sun",wd:"Pazar",short:"Paz",name:"OFF",focus:"Tam dinlenme",rest:true,
+ restTitle:"Tam dinlenme",restText:"Bugün hiçbir şey yapma. İyi uyu, protein ye."}
+];
+
+const VOL = [["Sırt",16],["Göğüs",13],["Quadriceps",13],["Hamstring / Kalça",12],["Biceps",8],["Yan omuz",7],["Triceps",6],["Baldır",6],["Karın",6],["Ön omuz",3],["Arka omuz",3]];
+
+/* ============ STORAGE ============ */
+const LS = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+function weekKey(){
+  const d=new Date(); const t=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  t.setDate(t.getDate()+3-((t.getDay()+6)%7));
+  const w1=new Date(t.getFullYear(),0,4);
+  return t.getFullYear()+"-"+(1+Math.round(((t-w1)/86400000-3+((w1.getDay()+6)%7))/7));
+}
+let WEIGHTS = LS.get("ant_weights_v1",{});
+let PROG = LS.get("ant_prog_v1",{});
+const WK = weekKey();
+if(!PROG[WK]) PROG[WK] = {};
+// sadece son 3 haftayı sakla
+Object.keys(PROG).sort().slice(0,-3).forEach(k=>delete PROG[k]);
+function saveProg(){ LS.set("ant_prog_v1",PROG); }
+function doneCount(dayId,exId){ return (PROG[WK][dayId]||{})[exId]||0; }
+function setDone(dayId,exId,n){
+  if(!PROG[WK][dayId]) PROG[WK][dayId]={};
+  PROG[WK][dayId][exId]=n; saveProg(); refreshDays();
+}
+
+/* ============ HELPERS ============ */
+const $ = s=>document.querySelector(s);
+const el = (t,c,x)=>{const e=document.createElement(t); if(c)e.className=c; if(x!=null)e.textContent=x; return e;};
+const reps = b => b.r1===b.r2 ? String(b.r1) : b.r1+"-"+b.r2;
+const mmss = s => Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+const yt = q => "https://www.youtube.com/results?search_query="+encodeURIComponent(q+" proper form technique");
+function totalSets(day){ return (day.blocks||[]).reduce((a,b)=> a + (b.t==="ex"?b.sets : b.t==="ss"?b.rounds : 0),0); }
+function dayComplete(day){
+  if(day.rest) return false;
+  return (day.blocks||[]).filter(b=>b.t==="ex"||b.t==="ss")
+    .every(b=> doneCount(day.id,b.id) >= (b.t==="ex"?b.sets:b.rounds));
+}
+
+/* ============ TIMER ============ */
+let T = {left:0,total:0,iv:null,onEnd:null,lock:null};
+const C = 339.29;
+async function lockScreen(){
+  try{ if("wakeLock" in navigator && !T.lock) T.lock = await navigator.wakeLock.request("screen"); }catch(e){}
+}
+function unlockScreen(){ try{ T.lock&&T.lock.release(); }catch(e){} T.lock=null; }
+let AC=null;
+function beep(times){
+  try{
+    AC = AC || new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==="suspended") AC.resume();
+    for(let i=0;i<times;i++){
+      const o=AC.createOscillator(), g=AC.createGain(), t0=AC.currentTime+i*0.22;
+      o.frequency.value = 880; o.type="sine";
+      g.gain.setValueAtTime(0.0001,t0);
+      g.gain.exponentialRampToValueAtTime(0.28,t0+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t0+0.16);
+      o.connect(g); g.connect(AC.destination); o.start(t0); o.stop(t0+0.2);
+    }
+  }catch(e){}
+  if(times>0 && navigator.vibrate) navigator.vibrate(times>1?[90,70,90]:[60]);
+}
+function paint(){
+  $("#t-num").textContent = mmss(Math.max(0,T.left));
+  $("#t-bar").style.strokeDashoffset = C*(1 - T.left/T.total);
+  $("#timer").classList.toggle("warn", T.left<=10);
+}
+function startTimer(sec,ctx,next,onEnd){
+  clearInterval(T.iv);
+  T.total = T.left = sec; T.onEnd = onEnd||null;
+  $("#t-ctx").textContent = ctx; $("#t-next").textContent = next||"";
+  $("#timer").classList.add("show"); paint(); lockScreen();
+  let cued = false;
+  T.iv = setInterval(()=>{
+    T.left--;
+    if(T.left===10 && !cued){ cued=true; beep(1); }
+    if(T.left<=0){ beep(2); stopTimer(true); return; }
+    paint();
+  },1000);
+}
+function stopTimer(natural){
+  clearInterval(T.iv); T.iv=null; unlockScreen();
+  $("#timer").classList.remove("show","warn");
+  const f=T.onEnd; T.onEnd=null; if(f) f(natural);
+}
+$("#t-skip").onclick = ()=>stopTimer(false);
+$("#t-plus").onclick = ()=>{ T.left+=15; T.total=Math.max(T.total,T.left); paint(); };
+$("#t-minus").onclick = ()=>{ T.left=Math.max(1,T.left-15); paint(); };
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && T.iv) stopTimer(false); });
+
+/* ============ RENDER ============ */
+let current = (new Date().getDay()+6)%7;
+
+function renderDays(){
+  const nav=$("#days"); nav.innerHTML="";
+  const today=(new Date().getDay()+6)%7;
+  P.forEach((d,i)=>{
+    const b=el("button","daybtn");
+    b.type="button"; b.setAttribute("aria-pressed", i===current);
+    if(i===today) b.classList.add("today");
+    if(dayComplete(d)) b.classList.add("done");
+    b.innerHTML='<span>'+d.short+'</span><small>'+(d.rest?"OFF":d.name.split(" ")[0])+'</small>';
+    b.onclick=()=>{ current=i; render(); window.scrollTo({top:0,behavior:"smooth"}); };
+    nav.appendChild(b);
+  });
+  const c=P.filter(d=>!d.rest&&dayComplete(d)).length;
+  $("#streak").textContent = c+"/5";
+}
+function refreshDays(){ renderDays(); }
+
+function exCard(day,b,idx){
+  const card=el("div","card"); const row=el("div","ex");
+  const rail=el("div","rail");
+  rail.appendChild(el("div","n",String(idx)));
+  const load=el("div","load"); const fill=el("i"); load.appendChild(fill); rail.appendChild(load);
+  row.appendChild(rail);
+
+  const body=el("div","body");
+  const h=el("h3","exname",b.tr); body.appendChild(h);
+  body.appendChild(el("p","exsub",b.en));
+
+  const chips=el("div","chips");
+  const c1=el("span","chip"); c1.innerHTML='<b>'+b.sets+'</b> set × <b>'+reps(b)+'</b>'; chips.appendChild(c1);
+  const c2=el("span","chip"); c2.innerHTML='dinlenme <b>'+mmss(b.rest)+'</b>'; chips.appendChild(c2);
+  const c3=el("span","chip"); c3.innerHTML='RIR <b>'+b.rir+'</b>'; chips.appendChild(c3);
+  if(b.uni) chips.appendChild(el("span","chip uni",b.uni+" başına"));
+  if(b.fail) chips.appendChild(el("span","chip fail","son set tükeniş"));
+  if(b.tempo) chips.appendChild(el("span","chip tempo",b.tempo));
+  body.appendChild(chips);
+  if(b.note) body.appendChild(el("p","note",b.note));
+
+  const sr=el("div","setrow");
+  sr.appendChild(el("div","setlbl","Setler"));
+  const dots=[];
+  const sync=()=>{
+    const n=doneCount(day.id,b.id);
+    dots.forEach((d,i)=>d.classList.toggle("on", i<n));
+    fill.style.height=(n/b.sets*100)+"%";
+    h.classList.toggle("done", n>=b.sets);
+  };
+  for(let i=1;i<=b.sets;i++){
+    const d=el("button","dot",String(i)); d.type="button";
+    d.setAttribute("aria-label",i+". set");
+    d.onclick=()=>{
+      const n=doneCount(day.id,b.id);
+      const nn = (n===i) ? i-1 : i;
+      setDone(day.id,b.id,nn); sync();
+      if(nn>n && nn<b.sets){
+        startTimer(b.rest,"Dinlenme", b.tr+" — sıradaki "+(nn+1)+". set");
+      }
+    };
+    dots.push(d); sr.appendChild(d);
+  }
+  const kg=el("div","kg");
+  const inp=document.createElement("input");
+  inp.type="number"; inp.inputMode="decimal"; inp.step="1.25"; inp.placeholder="—";
+  inp.setAttribute("aria-label",b.tr+" ağırlık");
+  inp.value = WEIGHTS[b.id]!=null ? WEIGHTS[b.id] : "";
+  inp.oninput=()=>{ WEIGHTS[b.id]=inp.value; LS.set("ant_weights_v1",WEIGHTS); };
+  kg.appendChild(inp); kg.appendChild(el("span",null,"kg"));
+  sr.appendChild(kg);
+  body.appendChild(sr);
+
+  const links=el("div","links");
+  const a=document.createElement("a");
+  a.className="vid"; a.href=yt(b.en); a.target="_blank"; a.rel="noopener noreferrer";
+  a.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8ZM10 15.2V8.8l5.2 3.2Z"/></svg>Form videosu';
+  links.appendChild(a);
+  if(b.alt&&b.alt.length){
+    const dt=document.createElement("details"); dt.className="alt";
+    const sm=document.createElement("summary"); sm.textContent="Makine doluysa";
+    dt.appendChild(sm); dt.appendChild(el("p",null,b.alt.join(" · ")));
+    links.appendChild(dt);
+  }
+  body.appendChild(links);
+  row.appendChild(body); card.appendChild(row);
+  sync();
+  return card;
+}
+
+function ssCard(day,b,idx){
+  const card=el("div","card");
+  const lab=el("div","sslabel"); lab.textContent="Süperset · "+b.rounds+" tur · aralarında mola yok";
+  card.appendChild(lab);
+  const row=el("div","ex");
+  const rail=el("div","rail");
+  rail.appendChild(el("div","n",String(idx)));
+  const load=el("div","load"); const fill=el("i"); load.appendChild(fill); rail.appendChild(load);
+  row.appendChild(rail);
+  const body=el("div","body");
+  const pair=el("div"); pair.style.display="flex"; pair.style.flexDirection="column"; pair.style.gap="10px";
+  b.items.forEach((it,i)=>{
+    const w=el("div","ssitem");
+    w.appendChild(el("span","tag",String.fromCharCode(65+i)));
+    const box=el("div");
+    box.appendChild(el("div","t",it.tr+" × "+it.reps));
+    box.appendChild(el("div","s",it.en));
+    w.appendChild(box);
+    const a=document.createElement("a");
+    a.className="vid"; a.style.marginLeft="auto"; a.href=yt(it.en); a.target="_blank"; a.rel="noopener noreferrer";
+    a.textContent="▶ video";
+    w.appendChild(a);
+    pair.appendChild(w);
+  });
+  body.appendChild(pair);
+  const chips=el("div","chips");
+  const c=el("span","chip"); c.innerHTML='tur arası <b>'+mmss(b.rest)+'</b>'; chips.appendChild(c);
+  const c2=el("span","chip"); c2.innerHTML='RIR <b>'+b.rir+'</b>'; chips.appendChild(c2);
+  body.appendChild(chips);
+
+  const sr=el("div","setrow");
+  sr.appendChild(el("div","setlbl","Turlar"));
+  const dots=[];
+  const sync=()=>{ const n=doneCount(day.id,b.id);
+    dots.forEach((d,i)=>d.classList.toggle("on",i<n)); fill.style.height=(n/b.rounds*100)+"%"; };
+  for(let i=1;i<=b.rounds;i++){
+    const d=el("button","dot",String(i)); d.type="button"; d.setAttribute("aria-label",i+". tur");
+    d.onclick=()=>{ const n=doneCount(day.id,b.id); const nn=(n===i)?i-1:i;
+      setDone(day.id,b.id,nn); sync();
+      if(nn>n && nn<b.rounds) startTimer(b.rest,"Tur arası","Sıradaki "+(nn+1)+". tur");
+    };
+    dots.push(d); sr.appendChild(d);
+  }
+  body.appendChild(sr);
+  row.appendChild(body); card.appendChild(row); sync();
+  return card;
+}
+
+function render(){
+  renderDays();
+  const day=P[current], m=$("#main"); m.innerHTML="";
+
+  const head=el("div","dayhead");
+  head.appendChild(el("div","kicker",day.wd));
+  head.appendChild(el("h2",null,day.name));
+  head.appendChild(el("p",null,day.focus + (day.rest?"":" · "+totalSets(day)+" set")));
+  m.appendChild(head);
+
+  if(day.rest){
+    const r=el("div","restday"); r.style.marginTop="18px";
+    r.appendChild(el("div","big",day.restTitle));
+    r.appendChild(el("p",null,day.restText));
+    m.appendChild(r);
+  } else {
+    const lg=el("div","legend");
+    lg.innerHTML='<b>RIR</b> = seti bıraktığında hâlâ yapabileceğin tekrar. RIR 2 ise 2 tekrar daha yapabilecek durumda dur. Bir sete bastığında dinlenme sayacı kendi başlar.';
+    m.appendChild(lg);
+
+    const wrap=el("div","blocks"); let n=0;
+    day.blocks.forEach(b=>{
+      if(b.t==="warm"||b.t==="cool"){
+        const c=el("div","card plain");
+        c.appendChild(el("h3",null,b.t==="warm"?"Isınma":"Soğuma"));
+        const ul=document.createElement("ul");
+        b.items.forEach(i=>ul.appendChild(el("li",null,i)));
+        c.appendChild(ul); wrap.appendChild(c);
+      } else if(b.t==="ex"){
+        wrap.appendChild(exCard(day,b,++n));
+      } else if(b.t==="ss"){
+        wrap.appendChild(ssCard(day,b,++n));
+      } else if(b.t==="fin"){
+        const c=el("div","card plain");
+        c.appendChild(el("h3",null,"Bitiriş"));
+        const t=el("div"); t.style.fontSize="17px"; t.style.fontWeight="700";
+        t.textContent=b.tr+" · "+(b.dur/60)+" dk"; c.appendChild(t);
+        c.appendChild(el("p","note",b.note));
+        const btn=el("button","startbtn","Sayacı başlat"); btn.type="button";
+        btn.onclick=()=>startTimer(b.dur,"Bitiriş",b.tr);
+        c.appendChild(btn); wrap.appendChild(c);
+      }
+    });
+    m.appendChild(wrap);
+
+    const tools=el("div","tools");
+    const rs=el("button","tool","Bu günü sıfırla"); rs.type="button";
+    rs.onclick=()=>{ if(PROG[WK][day.id]){ delete PROG[WK][day.id]; saveProg(); } render(); };
+    tools.appendChild(rs);
+    m.appendChild(tools);
+  }
+
+  /* --- sabit bölümler --- */
+  const s1=el("div","sec"); s1.appendChild(el("h3",null,"Üç kural"));
+  const rules=el("div","rules");
+  [["01","Yoğunluk","Bileşik hareketlerde 1-2 tekrar rezervde bırak. Tükenişe sadece izolasyonların son setinde git. Her seti sonuna kadar zorlarsan 4-6 hafta içinde tıkanırsın."],
+   ["02","Progresyon","Hedef aralığın üst sınırına iki antrenman üst üste ulaştıysan ağırlığı artır: üst vücut 2.5 kg, alt vücut 5 kg, izolasyon 1.25 kg. Tekrarlar alt sınıra düşer, yeniden tırmanırsın."],
+   ["03","Deload","Her 6-8 haftada bir hafta set sayısını yarıya indir, ağırlığı aynı bırak. Dinlenmiş dönersin."]
+  ].forEach(r=>{
+    const d=el("div","rule");
+    d.appendChild(el("span","num",r[0]));
+    d.appendChild(el("h4",null,r[1]));
+    d.appendChild(el("p",null,r[2]));
+    rules.appendChild(d);
+  });
+  s1.appendChild(rules); m.appendChild(s1);
+
+  const s3=el("div","sec"); s3.appendChild(el("h3",null,"Salon dışında belirleyen dört şey"));
+  const g=el("div","rules");
+  [["Protein","Kilo başına 1.6-2.2 g. Kas bundan yapılıyor; eksikse antrenman boşa gider."],
+   ["Uyku","7-9 saat. Toparlanmanın büyük kısmı burada oluyor, salonda değil."],
+   ["Sabır","Görünür değişim aylarla ölçülür, haftalarla değil. Program değiştirmek yerine aynı programda ağırlık artır."],
+   ["Devamlılık","Mükemmel 3 hafta değil, vasat 6 ay kazandırır. Bir günü kaçırdıysan ertesi gün kaldığın yerden devam et."]
+  ].forEach(r=>{
+    const d=el("div","rule");
+    d.appendChild(el("h4",null,r[0]));
+    d.appendChild(el("p",null,r[1]));
+    g.appendChild(d);
+  });
+  s3.appendChild(g); m.appendChild(s3);
+
+  const s2=el("div","sec"); s2.appendChild(el("h3",null,"Haftalık set dağılımı"));
+  const vw=el("div","volwrap"); const tb=document.createElement("table"); tb.className="vol";
+  tb.innerHTML="<thead><tr><th>Kas grubu</th><th>Set / hafta</th></tr></thead>";
+  const tbody=document.createElement("tbody");
+  VOL.forEach(v=>{ const tr=document.createElement("tr");
+    tr.appendChild(el("td",null,v[0])); tr.appendChild(el("td",null,String(v[1]))); tbody.appendChild(tr); });
+  tb.appendChild(tbody); vw.appendChild(tb); s2.appendChild(vw); m.appendChild(s2);
+
+  const f=el("footer","fine");
+  f.textContent="Ağırlıkların ve işaretlediğin setler bu cihazın tarayıcısında saklanır. Set işaretleri her pazartesi sıfırlanır, ağırlıklar kalır. \"Form videosu\" bağlantıları YouTube'da o hareketin aramasını açar.";
+  m.appendChild(f);
+}
+
+render();
+document.addEventListener("click",function once(){ beep(0); document.removeEventListener("click",once); },{once:true});
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible" && T.iv) lockScreen(); });
+</script>
+
+</body>
+</html>

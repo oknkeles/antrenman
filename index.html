@@ -89,7 +89,6 @@ header.top{position:sticky;top:0;z-index:40;background:var(--ground);border-bott
 .rail .n{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;color:var(--ink-3)}
 .body{flex:1;min-width:0;padding:12px 14px 13px}
 .exname{margin:0;font-size:17.5px;font-weight:700;line-height:1.25;font-variation-settings:"wdth" 104;text-wrap:balance}
-.exsub{margin:1px 0 0;font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
 .what{margin:8px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
 
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
@@ -116,30 +115,11 @@ details.alt p{margin:6px 0 0;color:var(--ink-2)}
 .ssitem:first-child{margin-top:0}
 .ssitem .tag{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:#fff;background:var(--accent);width:20px;height:20px;border-radius:5px;display:grid;place-items:center;flex:none;margin-top:2px}
 .ssitem .t{font-size:16px;font-weight:700;line-height:1.3}
-.ssitem .s{font-size:11.5px;color:var(--ink-3)}
 
 .restday{padding:26px 18px;text-align:center;background:var(--surface);border:1px dashed var(--line);border-radius:var(--r);margin-top:18px}
 .restday .big{font-size:26px;font-weight:800;font-variation-settings:"wdth" 110;margin:0 0 6px}
 .restday p{margin:0;color:var(--ink-2);font-size:14.5px}
 
-.sec{margin-top:26px}
-.sec > h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin:0 0 10px}
-.rules{display:flex;flex-direction:column;gap:10px}
-.rule{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
-.rule h4{margin:0 0 4px;font-size:15px;font-weight:700}
-.rule p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
-.rule .num{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--accent);font-weight:600;letter-spacing:.1em;display:block;margin-bottom:3px}
-.terms{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 15px}
-.terms dl{margin:0;display:grid;grid-template-columns:minmax(84px,auto) 1fr;gap:0 14px}
-.terms dt{font-weight:700;font-size:13.5px;padding:7px 0;border-top:1px solid var(--line)}
-.terms dd{margin:0;font-size:13.5px;color:var(--ink-2);padding:7px 0;border-top:1px solid var(--line)}
-.terms dt:first-of-type,.terms dl>dt:first-child+dd{border-top:0}
-.volwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
-table.vol{border-collapse:collapse;width:100%;font-size:13.5px}
-table.vol th,table.vol td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
-table.vol tr:last-child td{border-bottom:0}
-table.vol th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
-table.vol td:last-child{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:600}
 footer.fine{margin:22px 0 8px;font-size:12px;color:var(--ink-3);line-height:1.5}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media (min-width:560px){.dayhead h2{font-size:40px}}
@@ -209,37 +189,15 @@ const P = [
  {t:"ex",id:"sat_e3",plain:"Öne uzun bir adım at, arka dizin yere yaklaşsın; kalk ve diğer bacakla devam et.",tr:"Yürüyen Lunge",en:"Walking Lunge",sets:3,r1:10,r2:10,rest:90,rir:2,uni:"bacak",alt:["Bulgarian Split Squat","Step-up"]},
  {t:"ex",id:"sat_e4",plain:"Otur, ağırlık dizlerinin üstünde; parmak uçlarına yüksel.",tr:"Oturarak Calf Raise",en:"Seated Calf Raise",sets:3,r1:12,r2:15,rest:60,rir:0,fail:true,alt:["Leg Press Calf Raise"]},
  {t:"ex",id:"sat_e5",plain:"Bara asıl; bacaklarını sallanmadan yukarı kaldır.",tr:"Barda Bacak Kaldırış",en:"Hanging Leg Raise",sets:3,r1:10,r2:15,rest:60,rir:1,fail:true,note:"Sallanmadan, kontrollü.",alt:["Captain's Chair Knee Raise","Reverse Crunch"]},
- {t:"fin",id:"sat_f1",tr:"Eğimli Yürüyüş",dur:720,note:"Eğim %8-10, konuşabileceğin tempoda. Bisiklet de olur."},
+ {t:"fin",id:"sat_f1",tr:"Eğimli Yürüyüş",en:"Incline Treadmill Walk",dur:720,note:"Eğim %8-10, konuşabileceğin tempoda. Bisiklet de olur."},
  {t:"cool",items:["Alt vücut esnetme"]}]},
 
 {id:"sun",wd:"Pazar",short:"Paz",name:"OFF",focus:"Tam dinlenme",rest:true,
  restTitle:"Tam dinlenme",restText:"Bugün hiçbir şey yapma. İyi uyu, protein ye."}
 ];
 
-const VOL = [["Sırt",16],["Göğüs",13],["Quadriceps",13],["Hamstring / Kalça",12],["Biceps",8],["Yan omuz",7],["Triceps",6],["Baldır",6],["Karın",6],["Ön omuz",3],["Arka omuz",3]];
 
 
-const TERIM=[
-["press","itme"],
-["curl","dirsekten kol bükme"],
-["row / kürek","gövdene doğru çekme"],
-["pulldown","yukarıdan aşağı çekme"],
-["raise","kaldırış"],
-["fly","düz kollarla önde birleştirme"],
-["pushdown","aşağı doğru itme"],
-["extension","kolu ya da bacağı düzleştirme"],
-["squat","çömelip kalkma"],
-["deadlift","kalçayı geriye iterek eğilip doğrulma"],
-["lunge","öne adımla çökme"],
-["thrust","kalçayı yukarı itme"],
-["goblet","ağırlığı göğüste kupa gibi tutma"],
-["calf","baldır"],
-["RIR","seti bıraktığında hâlâ yapabileceğin tekrar sayısı"],
-["süperset","iki hareketi ara vermeden peş peşe yapmak"],
-["tempo","hareketi ne kadar yavaş yaptığın"],
-["deload","set sayısını yarıya indirdiğin hafifletme haftası"],
-["tükeniş","bir tekrar daha yapamayacak duruma gelmek"]
-];
 
 /* ============ YARDIMCILAR ============ */
 const $ = s=>document.querySelector(s);
@@ -277,8 +235,7 @@ function exCard(b,idx){
   const card=el("div","card"), row=el("div","ex");
   const rail=el("div","rail"); rail.appendChild(el("div","n",String(idx))); row.appendChild(rail);
   const body=el("div","body");
-  body.appendChild(el("h3","exname",b.tr));
-  body.appendChild(el("p","exsub",b.en));
+  body.appendChild(el("h3","exname",b.en));
   if(b.plain) body.appendChild(el("p","what",b.plain));
 
   const chips=el("div","chips");
@@ -314,8 +271,7 @@ function ssCard(b,idx){
     const w=el("div","ssitem");
     w.appendChild(el("span","tag",String.fromCharCode(65+i)));
     const box=el("div"); box.style.minWidth="0";
-    box.appendChild(el("div","t",it.tr+" × "+it.reps));
-    box.appendChild(el("div","s",it.en));
+    box.appendChild(el("div","t",it.en+" × "+it.reps));
     if(it.plain) box.appendChild(el("p","what",it.plain));
     const lk=el("div","links"); lk.appendChild(videoLink(it.en)); box.appendChild(lk);
     w.appendChild(box);
@@ -329,9 +285,6 @@ function ssCard(b,idx){
   return card;
 }
 
-function section(title,node){
-  const s=el("div","sec"); s.appendChild(el("h3",null,title)); s.appendChild(node); return s;
-}
 
 function render(){
   renderDays();
@@ -367,46 +320,13 @@ function render(){
         const c=el("div","card plainc");
         c.appendChild(el("h3",null,"Bitiriş"));
         const t=el("div"); t.style.fontSize="17px"; t.style.fontWeight="700";
-        t.textContent=b.tr+" · "+(b.dur/60)+" dk"; c.appendChild(t);
+        t.textContent=b.en+" · "+(b.dur/60)+" dk"; c.appendChild(t);
         c.appendChild(el("p","note",b.note));
         wrap.appendChild(c);
       }
     });
     m.appendChild(wrap);
   }
-
-  /* --- terimler --- */
-  const tw=el("div","terms"); const dl=document.createElement("dl");
-  TERIM.forEach(t=>{ dl.appendChild(el("dt",null,t[0])); dl.appendChild(el("dd",null,t[1])); });
-  tw.appendChild(dl);
-  m.appendChild(section("Bu kelimeler ne demek",tw));
-
-  /* --- kurallar --- */
-  const rules=el("div","rules");
-  [["01","Yoğunluk","Bileşik hareketlerde 1-2 tekrar yedekte bırak. Sonuna kadar sadece izolasyonların son setinde git. Her seti sonuna kadar zorlarsan 4-6 hafta içinde tıkanırsın."],
-   ["02","Progresyon","Hedef aralığın üst sınırına iki antrenman üst üste ulaştıysan ağırlığı artır: üst vücut 2.5 kg, alt vücut 5 kg, izolasyon 1.25 kg. Tekrarlar alt sınıra düşer, yeniden tırmanırsın."],
-   ["03","Deload","Her 6-8 haftada bir hafta set sayısını yarıya indir, ağırlığı aynı bırak. Dinlenmiş dönersin."]
-  ].forEach(r=>{ const d=el("div","rule");
-    d.appendChild(el("span","num",r[0])); d.appendChild(el("h4",null,r[1])); d.appendChild(el("p",null,r[2]));
-    rules.appendChild(d); });
-  m.appendChild(section("Üç kural",rules));
-
-  const g=el("div","rules");
-  [["Protein","Kilo başına 1.6-2.2 g. Kas bundan yapılıyor; eksikse antrenman boşa gider."],
-   ["Uyku","7-9 saat. Toparlanmanın büyük kısmı burada oluyor, salonda değil."],
-   ["Sabır","Görünür değişim aylarla ölçülür, haftalarla değil. Program değiştirmek yerine aynı programda ağırlık artır."],
-   ["Devamlılık","Mükemmel 3 hafta değil, vasat 6 ay kazandırır. Bir günü kaçırdıysan ertesi gün kaldığın yerden devam et."]
-  ].forEach(r=>{ const d=el("div","rule");
-    d.appendChild(el("h4",null,r[0])); d.appendChild(el("p",null,r[1])); g.appendChild(d); });
-  m.appendChild(section("Salon dışında belirleyen dört şey",g));
-
-  const vw=el("div","volwrap"); const tb=document.createElement("table"); tb.className="vol";
-  tb.innerHTML="<thead><tr><th>Kas grubu</th><th>Set / hafta</th></tr></thead>";
-  const tbody=document.createElement("tbody");
-  VOL.forEach(v=>{ const tr=document.createElement("tr");
-    tr.appendChild(el("td",null,v[0])); tr.appendChild(el("td",null,String(v[1]))); tbody.appendChild(tr); });
-  tb.appendChild(tbody); vw.appendChild(tb);
-  m.appendChild(section("Haftalık set dağılımı",vw));
 
   const f=el("footer","fine");
   f.textContent="“Form videosu” bağlantıları YouTube’da o hareketin aramasını açar; üstteki videolardan biri işini görür.";

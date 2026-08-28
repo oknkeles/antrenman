@@ -1,12 +1,10 @@
 # Demir Defteri
 
-5 günlük hipertrofi programı için tek dosyalık antrenman takip uygulaması.
+5 günlük hipertrofi programı. Tek dosyalık, bağımlılıksız HTML.
 Telefonda aç → Paylaş → **Ana Ekrana Ekle**.
 
-- Gün otomatik seçilir, hareketler sırayla listelenir
-- Set numarasına dokun → dinlenme sayacı kendiliğinden başlar (bitmeden 10 sn önce sesli uyarı)
-- Sayaç çalışırken ekran sönmez (Wake Lock)
-- Ağırlıklar ve işaretlenen setler tarayıcıda saklanır; set işaretleri her pazartesi sıfırlanır
+- Gün otomatik seçilir; hareketler sırayla, ne yapılacağı sade Türkçe yazılı
 - Her harekette form videosu bağlantısı ve makine doluysa alternatifler
+- Altta terim listesi, üç kural ve haftalık set dağılımı
 
-Bağımlılık yok, sunucu yok: `index.html` tek başına çalışır.
+Sayaç, giriş, kayıt yok — sadece programın kendisi.

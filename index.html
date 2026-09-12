@@ -182,14 +182,19 @@ const P = [
    {tr:"Baş Üstü Kablo Triceps",en:"Overhead Cable Triceps Extension",reps:12,plain:"Kabloyu baş üstünde tut; dirsekler sabit, kollarını öne doğru düzleştir."}]},
  {t:"cool",items:["Genel üst vücut esnetme"]}]},
 
-{id:"sat",wd:"Cumartesi",short:"Cmt",name:"LOWER + KONDİSYON",focus:"Alt vücut ikinci uyarı · kardiyo bitiriş",blocks:[
+{id:"sat",wd:"Cumartesi",short:"Cmt",name:"LOWER + ABS",focus:"Makine ağırlıklı alt vücut · karın",blocks:[
  {t:"warm",items:["5 dk bisiklet","Kalça mobilitesi 3 dk"]},
- {t:"ex",id:"sat_e1",plain:"Tek dambılı göğsünde kupa tutar gibi tut; çömel ve kalk.",tr:"Goblet Squat",en:"Goblet Squat",sets:3,r1:12,r2:15,rest:90,rir:2,alt:["Leg Press","Hack Squat"]},
- {t:"ex",id:"sat_e2",plain:"Sırtın sehpada, bar kalçanın üstünde; kalçanı yukarı it, tepede sık.",tr:"Hip Thrust",en:"Hip Thrust",sets:3,r1:12,r2:15,rest:90,rir:2,note:"Tepede 1 sn sık.",alt:["Back Extension","Glute Machine"]},
- {t:"ex",id:"sat_e3",plain:"Öne uzun bir adım at, arka dizin yere yaklaşsın; kalk ve diğer bacakla devam et.",tr:"Yürüyen Lunge",en:"Walking Lunge",sets:3,r1:10,r2:10,rest:90,rir:2,uni:"bacak",alt:["Bulgarian Split Squat","Step-up"]},
- {t:"ex",id:"sat_e4",plain:"Otur, ağırlık dizlerinin üstünde; parmak uçlarına yüksel.",tr:"Oturarak Calf Raise",en:"Seated Calf Raise",sets:3,r1:12,r2:15,rest:60,rir:0,fail:true,alt:["Leg Press Calf Raise"]},
- {t:"ex",id:"sat_e5",plain:"Bara asıl; bacaklarını sallanmadan yukarı kaldır.",tr:"Barda Bacak Kaldırış",en:"Hanging Leg Raise",sets:3,r1:10,r2:15,rest:60,rir:1,fail:true,note:"Sallanmadan, kontrollü.",alt:["Captain's Chair Knee Raise","Reverse Crunch"]},
- {t:"fin",id:"sat_f1",tr:"Eğimli Yürüyüş",en:"Incline Treadmill Walk",dur:720,note:"Eğim %8-10, konuşabileceğin tempoda. Bisiklet de olur."},
+ {t:"ex",id:"sat_e1",plain:"Makinede sırtüstü yaslan, platformu ayaklarınla yukarı it.",en:"45-Degree Leg Press",sets:3,r1:12,r2:12,rest:120,rir:2,note:"Dizlerini tam kilitleme, kalçan pedden kalkmasın.",alt:["Hack Squat","Goblet Squat"]},
+ {t:"ss",id:"sat_ss1",rounds:3,rest:60,rir:1,items:[
+   {en:"Hip Adduction Machine",reps:12,plain:"Bacaklar pedlerin arasında dışarıda; içeri doğru kapat. İç bacak çalışır."},
+   {en:"Hip Abduction Machine",reps:12,plain:"Bacaklar pedlerin arasında içeride; dışarı doğru aç. Dış kalça çalışır."}]},
+ {t:"ex",id:"sat_e3",plain:"Otur, ayak bileğin pedin altında; bacağını yukarı düzleştir. Ön bacak çalışır.",en:"Leg Extension",sets:3,r1:12,r2:12,rest:90,rir:1,fail:true,note:"Tepede 1 sn sık, yavaş indir.",alt:["Leg Press (dar ayak)"]},
+ {t:"ex",id:"sat_e4",plain:"Omuzların pedin altında; parmak uçlarına basıp kendini yukarı it, topuğu yavaş indir.",en:"Standing Calf Raise",sets:3,r1:12,r2:12,rest:60,rir:0,fail:true,alt:["Leg Press Calf Raise","Seated Calf Raise"]},
+ {t:"ex",id:"sat_e5",plain:"Yüz üstü yat, ayak bileklerin pedin altında; topuklarını kalçana doğru bükerek çek.",en:"Lying Leg Curl",sets:3,r1:12,r2:12,rest:90,rir:1,fail:true,alt:["Seated Leg Curl"]},
+ {t:"ss",id:"sat_ss2",rounds:3,rest:60,rir:1,items:[
+   {en:"Bicycle Crunch",reps:12,plain:"Sırtüstü, dirsekle karşı dizi buluştur, pedal çevirir gibi sağ-sol."},
+   {en:"Plank",hold:"30-45 sn",plain:"Dirsekler ve ayak uçlarında düz dur; kalça düşmesin, karnı sık."},
+   {en:"Heel Touches",reps:12,plain:"Sırtüstü, dizler bükülü; omzunu hafif kaldırıp sağa-sola uzanarak topuklarına dokun."}]},
  {t:"cool",items:["Alt vücut esnetme"]}]},
 
 {id:"sun",wd:"Pazar",short:"Paz",name:"OFF",focus:"Tam dinlenme",rest:true,
@@ -271,7 +276,7 @@ function ssCard(b,idx){
     const w=el("div","ssitem");
     w.appendChild(el("span","tag",String.fromCharCode(65+i)));
     const box=el("div"); box.style.minWidth="0";
-    box.appendChild(el("div","t",it.en+" × "+it.reps));
+    box.appendChild(el("div","t",it.en+(it.hold?" · "+it.hold:" × "+it.reps)));
     if(it.plain) box.appendChild(el("p","what",it.plain));
     const lk=el("div","links"); lk.appendChild(videoLink(it.en)); box.appendChild(lk);
     w.appendChild(box);

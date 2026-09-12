@@ -146,6 +146,7 @@ const P = [
  {t:"ex",id:"mon_e4",plain:"Otur, dambılları omuz hizasından baş üstüne kadar it.",tr:"Oturarak Dambıl Omuz Press",en:"Seated Dumbbell Shoulder Press",sets:3,r1:8,r2:10,rest:120,rir:2,alt:["Machine Shoulder Press","Smith Machine Press"]},
  {t:"ex",id:"mon_e5",plain:"Kollar düz; dambılları yanlardan omuz hizasına kaldır.",tr:"Dambıl Yan Kaldırış",en:"Dumbbell Lateral Raise",sets:3,r1:15,r2:20,rest:60,rir:1,fail:true,note:"Hafif ağırlık, momentum yok. Omuz genişliğinin ana hareketi.",alt:["Cable Lateral Raise","Machine Lateral Raise"]},
  {t:"ex",id:"mon_e6",plain:"Dirsekler gövdene yapışık dursun, halatı aşağı it. Sadece ön kolun hareket eder.",tr:"Halat Triceps Pushdown",en:"Rope Pushdown",sets:3,r1:12,r2:15,rest:60,rir:1,fail:true,alt:["EZ-Bar Pushdown","Overhead Cable Extension"]},
+ {t:"ex",id:"mon_e7",plain:"Tek dambılı iki elle baş üstünde tut; dirsekler sabit, dambılı ensene indirip yukarı düzleştir.",en:"Overhead Dumbbell Triceps Extension",sets:3,r1:10,r2:12,rest:60,rir:1,fail:true,alt:["Overhead Cable Triceps Extension","EZ-Bar Skull Crusher"]},
  {t:"cool",items:["Göğüs kapı esnetmesi 2×30 sn","Triceps esnetme 2×30 sn"]}]},
 
 {id:"tue",wd:"Salı",short:"Sal",name:"PULL",focus:"Sırt · Arka Omuz · Biceps",blocks:[
@@ -153,7 +154,9 @@ const P = [
  {t:"ex",id:"tue_e1",plain:"Otur, yukarıdaki barı göğsüne doğru aşağı çek.",tr:"Lat Pulldown (geniş tutuş)",en:"Lat Pulldown",sets:4,r1:8,r2:10,rest:150,rir:2,note:"Barı göğse çek, dirsekleri aşağı-geri sür.",alt:["Weighted Pull-up","Assisted Pull-up"]},
  {t:"ex",id:"tue_e2",plain:"Göğsün pede yaslı; kolları geriye çek, kürek kemiklerini birbirine sık.",tr:"Göğüs Destekli Kürek",en:"Chest-Supported Row",sets:4,r1:8,r2:10,rest:150,rir:2,note:"Göğüs desteği beli devre dışı bırakır, sırta odaklanırsın.",alt:["Barbell Row","T-Bar Row"]},
  {t:"ex",id:"tue_e3",plain:"Kabloyu tek elle gövdene doğru çek; omzun önce öne uzansın, sonra geri toplansın.",tr:"Tek Kol Kablo Kürek",en:"Single-Arm Cable Row",sets:3,r1:10,r2:12,rest:90,rir:2,uni:"kol",note:"Gövdeni çevirme, iş sırtta kalsın.",alt:["Single Arm Dumbbell Row","Single Arm Machine Row"]},
+ {t:"ex",id:"tue_e8",plain:"Ayakta, kollar düz; kablo barını yukarıdan uyluklarına doğru aşağı bastır.",en:"Straight-Arm Cable Pulldown",sets:3,r1:12,r2:15,rest:60,rir:1,note:"Dirsekleri bükme, iş koltuk altında (lat) hissedilsin.",alt:["Dumbbell Pullover"]},
  {t:"ex",id:"tue_e4",plain:"Halatı yüzüne doğru çek; eller kulak hizasında iki yana açılsın.",tr:"Face Pull",en:"Face Pull",sets:3,r1:15,r2:20,rest:60,rir:1,note:"Postür için. Ağırlığı düşük tut, kasmaya odaklan.",alt:["Reverse Pec Deck","Rear Delt Fly"]},
+ {t:"ex",id:"tue_e7",plain:"Makinede yüzün pede dönük otur; kolları düz tutup yanlara ve geriye aç.",en:"Reverse Pec Deck",sets:3,r1:15,r2:20,rest:60,rir:1,fail:true,alt:["Rear Delt Dumbbell Fly","Cable Rear Delt Fly"]},
  {t:"ex",id:"tue_e5",plain:"Kol bükme: dirsekler sabit, barı göğsüne doğru kaldır.",tr:"EZ-Bar Biceps Curl",en:"EZ-Bar Curl",sets:3,r1:8,r2:10,rest:90,rir:1,alt:["Barbell Curl","Cable Curl"]},
  {t:"ex",id:"tue_e6",plain:"Eğimli sehpada arkaya yaslan, kollar aşağı sarksın; dambılları bükerek kaldır.",tr:"Eğimli Dambıl Curl",en:"Incline Dumbbell Curl",sets:2,r1:12,r2:15,rest:60,rir:0,fail:true,note:"Kollar gövdenin arkasında kalsın, biceps uzun başını esnetir.",alt:["Cable Curl (arkadan)"]},
  {t:"cool",items:["Lat esnetme 2×30 sn","Biceps esnetme 2×30 sn"]}]},
@@ -162,24 +165,30 @@ const P = [
  {t:"warm",items:["5 dk bisiklet","Kalça açıcı dinamik esnetme 2×10","Boş bar squat 2×10, sonra artan 2 ısınma seti"]},
  {t:"ex",id:"wed_e1",plain:"Bar sırtında; çömel ve kalk. Kalça diz hizasının altına insin.",tr:"Barbell Squat",en:"Barbell Squat",sets:4,r1:6,r2:8,rest:180,rir:2,note:"En uzun dinlenme burada. Acele etme.",alt:["Hack Squat","Smith Machine Squat"]},
  {t:"ex",id:"wed_e2",plain:"Dizler hafif bükülü; kalçanı geriye it, bar bacaklarına değerek insin.",tr:"Romen Deadlift",en:"Romanian Deadlift",sets:3,r1:8,r2:10,rest:150,rir:2,note:"Bel nötr. Hareketi hamstring esnemesi durdurur, yer değil.",alt:["Dumbbell RDL","Good Morning"]},
- {t:"ex",id:"wed_e3",plain:"Makinede otur, platformu bacaklarınla ileri it.",tr:"Leg Press",en:"Leg Press",sets:3,r1:10,r2:12,rest:120,rir:2,alt:["Bulgarian Split Squat","Walking Lunge"]},
+ {t:"ex",id:"wed_e7",plain:"Sırtın sehpada, bar kalçanın üstünde; kalçanı yukarı it, tepede 1 sn sık.",en:"Barbell Hip Thrust",sets:3,r1:10,r2:12,rest:90,rir:2,alt:["Hip Thrust Machine","Glute Bridge"]},
+ {t:"ex",id:"wed_e3",plain:"Elde dambıllar, öne uzun adım at; arka diz yere yaklaşsın, kalk ve diğer bacakla devam et.",en:"Walking Lunge",sets:3,r1:10,r2:10,rest:90,rir:2,uni:"bacak",alt:["Bulgarian Split Squat","Reverse Lunge"]},
  {t:"ex",id:"wed_e4",plain:"Otur, topuklarını kalçana doğru bükerek çek. Arka bacak çalışır.",tr:"Oturarak Leg Curl",en:"Seated Leg Curl",sets:3,r1:12,r2:15,rest:90,rir:1,fail:true,alt:["Lying Leg Curl"]},
  {t:"ex",id:"wed_e5",plain:"Parmak uçlarına yüksel, sonra topuğunu yavaşça indir.",tr:"Ayakta Calf Raise",en:"Standing Calf Raise",sets:3,r1:10,r2:12,rest:90,rir:0,fail:true,tempo:"Tepede 2 sn bekle, 3 sn indir",note:"Baldır tekrar sayısıyla değil, gerilim süresiyle büyür.",alt:["Smith Machine Calf Raise"]},
  {t:"ex",id:"wed_e6",plain:"Diz üstü otur, halatı ensende tut; karnını kasarak öne doğru kıvrıl.",tr:"Kablo Crunch",en:"Cable Crunch",sets:3,r1:12,r2:15,rest:60,rir:1,fail:true,note:"Kalçadan değil belden kıvır.",alt:["Machine Crunch","Hanging Leg Raise"]},
+ {t:"ex",id:"wed_e8",plain:"Bara asıl; bacaklarını sallanmadan yukarı kaldır, yavaş indir.",en:"Hanging Leg Raise",sets:3,r1:10,r2:15,rest:60,rir:1,fail:true,alt:["Captain's Chair Knee Raise","Reverse Crunch"]},
  {t:"cool",items:["Quad esnetme 2×30 sn","Hamstring esnetme 2×30 sn"]}]},
 
 {id:"thu",wd:"Perşembe",short:"Per",name:"OFF",focus:"Aktif toparlanma",rest:true,
  restTitle:"Bugün ağırlık yok",restText:"30-45 dk tempolu yürüyüş. Kaslar bugün büyüyor, salonda değil."},
 
-{id:"fri",wd:"Cuma",short:"Cum",name:"UPPER",focus:"Üst vücut · pompa · hafif yükler",blocks:[
+{id:"fri",wd:"Cuma",short:"Cum",name:"UPPER",focus:"Üst vücut · pompa",blocks:[
  {t:"warm",items:["5 dk kardiyo","Omuz ve dirsek mobilitesi 3 dk"]},
  {t:"ex",id:"fri_e1",plain:"Smith makinesinde eğimli sehpa; barı göğsünden yukarı it.",tr:"Eğimli Smith Press",en:"Incline Smith Machine Press",sets:3,r1:10,r2:12,rest:120,rir:3,alt:["Incline Machine Press"]},
- {t:"ex",id:"fri_e2",plain:"Avuçların sana dönük olacak şekilde bara asıl, çeneni barın üstüne çek.",tr:"Ters Tutuş Barfiks",en:"Chin-up",sets:3,r1:10,r2:12,rest:120,rir:3,alt:["Reverse Grip Lat Pulldown","Assisted Chin-up"]},
+ {t:"ex",id:"fri_e5",plain:"Makinede otur, kolları hafif bükülü tutup önde birleştir.",en:"Pec Deck",sets:3,r1:12,r2:15,rest:60,rir:1,fail:true,alt:["Cable Fly"]},
+ {t:"ex",id:"fri_e2",plain:"Otur, V-tutamağı ya da ters tutuşla barı göğsüne doğru aşağı çek.",en:"Close-Grip Lat Pulldown",sets:3,r1:10,r2:12,rest:90,rir:2,note:"Barfiks yerine. Güçlendikçe Assisted Chin-up makinesine geçebilirsin.",alt:["Assisted Chin-up Machine","Reverse Grip Lat Pulldown"]},
  {t:"ex",id:"fri_e3",plain:"Otur, tutamağı karnına doğru çek; göğsünü dik tut.",tr:"Oturarak Kablo Kürek (nötr tutuş)",en:"Seated Cable Row",sets:3,r1:12,r2:15,rest:90,rir:2,alt:["Machine Row"]},
  {t:"ex",id:"fri_e4",plain:"Kabloyu tek elle yandan omuz hizasına kaldır.",tr:"Tek Kol Kablo Yan Kaldırış",en:"Cable Lateral Raise",sets:4,r1:15,r2:20,rest:45,rir:1,fail:true,uni:"kol",alt:["Dumbbell Lateral Raise"]},
  {t:"ss",id:"fri_ss1",rounds:3,rest:90,rir:1,items:[
    {tr:"Çekiç Curl",en:"Hammer Curl",reps:12,plain:"Kol bükme, ama avuçlar birbirine baksın — dambılı çekiç sapı tutar gibi tut."},
    {tr:"Baş Üstü Kablo Triceps",en:"Overhead Cable Triceps Extension",reps:12,plain:"Kabloyu baş üstünde tut; dirsekler sabit, kollarını öne doğru düzleştir."}]},
+ {t:"ss",id:"fri_ss2",rounds:3,rest:90,rir:1,items:[
+   {en:"Cable Curl",reps:12,plain:"Alt makaradaki barı dirsekler sabit, göğsüne doğru bükerek kaldır."},
+   {en:"Straight-Bar Pushdown",reps:12,plain:"Dirsekler gövdene yapışık; düz barı aşağı it, kollarını tam düzleştir."}]},
  {t:"cool",items:["Genel üst vücut esnetme"]}]},
 
 {id:"sat",wd:"Cumartesi",short:"Cmt",name:"LOWER + ABS",focus:"Makine ağırlıklı alt vücut · karın",blocks:[
